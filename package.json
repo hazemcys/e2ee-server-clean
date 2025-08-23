@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/main.js\"",
-    "build": "tsc -p . && prisma generate && prisma db push",
+    "build": "prisma generate && prisma db push && tsc -p .",
     "start": "node dist/main.js",
-    "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev"
   },
@@ -23,6 +22,7 @@
     "prisma": "^5.19.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "sqlite3": "^5.1.6",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -31,5 +31,8 @@
     "ts-node-dev": "^2.0.0",
     "tsc-watch": "^7.1.1",
     "typescript": "^5.5.4"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   }
 }

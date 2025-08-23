@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
+import { DatabaseEncryptionService } from './database/encryption.service.js';
 
 async function bootstrap() {
   try {
@@ -15,6 +16,10 @@ async function bootstrap() {
 
     const app = await NestFactory.create(AppModule, { logger: ['log', 'error', 'warn'] });
     app.enableCors();
+    
+    // Initialize database encryption
+    const encryptionService = app.get(DatabaseEncryptionService);
+    await encryptionService.initializeEncryptedDatabase();
     
     const port = process.env.PORT ? Number(process.env.PORT) : 3000;
     console.log(`Attempting to bind to port ${port}...`);
